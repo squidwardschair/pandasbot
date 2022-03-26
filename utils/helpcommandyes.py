@@ -63,7 +63,7 @@ class myHelp(HelpCommand):
         return [embed, cog.description or 'N/A']
 
     async def create_game_embed(self):
-        embed = discord.Embed(title="SquiwardBot Games", description="A variety of fun games to play on your own and with friends, play one of these while hanging out and chatting in your server!",
+        embed = discord.Embed(title="Pandas Games", description="A variety of fun games to play on your own and with friends, play one of these while hanging out and chatting in your server!",
                               timestamp=discord.utils.utcnow(), color=discord.Color.teal())
         for name in self.games:
             cog: Cog = self.context.bot.get_cog(name)
@@ -112,7 +112,7 @@ class myHelp(HelpCommand):
         view.add_item(HelpSelect(embeds, ctx.author))
         msg=await ctx.send(embed=embed, view=view)
         view.message=msg
-        
+
     async def send_cog_help(self, cog: Cog):
         if cog.qualified_name in self.games:
             await self.context.send(embed=await self.create_game_embed())
