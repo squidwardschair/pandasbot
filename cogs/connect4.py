@@ -209,7 +209,20 @@ class ConnectButtons(discord.ui.View):
 class Connect4(commands.Cog, name="Connect 4", description="This fun board game has been recreated on Discord! Alternate between dropping red and yellow pieces down on a board to try and form 4 in a row."):
 
     def __init__(self, bot):
-        self.bot = bot
+        self.bot:SquidwardBot = bot
+
+    async def check_db(self, ctx: commands.Context, opponent: discord.Member):
+        if await self.bot.db.fetchval("SELECT member1 FROM connect WHERE ((member1 = $1 OR member1 = $2) OR (member2 = $1 OR member2 = $2)) AND channel = $3", ctx.author.id, opponent.id, ctx.channel.id):
+            await ctx.send("You're already in a game in this channel!")
+            return False
+        return True
+
+    async def game_check(self, ctx: commands.Context, opponent: discord.Member):
+        if ctx.author.bot or opponent.bot or ctx.author == opponent:
+            await ctx.send("You can't play Connect 4 with bots or yourself!")
+            return False
+        dbcheck = await self.check_db(ctx, opponent)
+        return dbcheck is not False
 
     @commands.command(name="connect4", aliases=["c4"], help="Play Connect 4 with another member; first to four in a row wins! If you don't know the rules, read them up [here](https://www.youtube.com/watch?v=utXzIFEVPjA)", brief="Play Connect 4 with another member")
     @commands.cooldown(rate=1, per=5, type=commands.BucketType.guild)
@@ -217,18 +230,20 @@ class Connect4(commands.Cog, name="Connect 4", description="This fun board game 
         if opponent is None:
             await ctx.send("Provide me someone to play Connect 4 with!")
             return
-        if ctx.author.bot or opponent.bot or ctx.author == opponent:
-            await ctx.send("You can't play Connect 4 with bots or yourself!")
+        gamecheck=await self.game_check(ctx, opponent)
+        if gamecheck is False:
             return
         checkopponent = await request_game(ctx, f"{ctx.author} is challenging you to a game of Connect 4. You have 2 minutes to respond or the game will be automatically declined.", opponent)
         if checkopponent is False:
             return
+        await self.bot.db.execute("INSERT INTO chessgame VALUES ($1, $2, $3);", ctx.author.id, opponent.id, ctx.channel.id)
         board = ConnectBoard([ctx.author, opponent], ctx)
         await board.start_game()
         while True:
             guess = await board.run_guess()
             if guess is False:
                 break
+        await self.bot.db.execute("DELETE FROM chessgame WHERE member1 = $1 AND member2 = $2 AND channel = $3;", ctx.author.id, opponent.id, ctx.channel.id)
 
 
 async def setup(bot: SquidwardBot):

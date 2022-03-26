@@ -25,10 +25,12 @@ class Utilities(commands.Cog, name="Utilities", description="Utility commands to
         except (commands.errors.ExtensionNotFound, commands.errors.ExtensionNotLoaded) as e:
             await ctx.send(f"I did not find a cog named {cog_name}.")
             return
-        dbgames = ['chessgame', 'wordle', 'sokoban', 'worldgame']
+        dbgames = ['chessgame', 'wordle', 'sokoban', 'worldgame', 'connect4']
         for game in dbgames:
-            if cog_name.lower().endswith(game):
-                await self.bot.db.execute(f"DELETE FROM {game}")
+            if cog_name.lower().endswith("connect4"):
+                await self.bot.db.execute("DELETE FROM connect;")
+            elif cog_name.lower().endswith(game):
+                await self.bot.db.execute(f"DELETE FROM {game};")
 
     @commands.command(name="shutdown", help="Shuts down the bot", brief="Shuts down the bot")
     @commands.is_owner()

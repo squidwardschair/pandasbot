@@ -92,12 +92,11 @@ bot = SquidwardBot()
 @bot.event
 async def on_ready():
     print("Bot is ready")
-    await bot.db.execute("DELETE FROM uno;")
     await bot.db.execute("DELETE FROM worldgame;")
-
     await bot.db.execute("DELETE FROM chessgame;")
     await bot.db.execute("DELETE FROM sokogames;")
     await bot.db.execute("DELETE FROM wordle;")
+    await bot.db.execute("DELETE FROM connect;")
 
 
 @bot.check
