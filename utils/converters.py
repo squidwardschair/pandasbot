@@ -81,6 +81,7 @@ async def command_help_format(command: str, ctx: commands.Context = None):
     if command == "remind":
         embed = discord.Embed(
             title="Command: remind", description=f"**Description:** Sets a reminder for yourself \n **Format:** {ctx.clean_prefix}remind <time - timedelta, timeshorthand, or time and date with timezone> <reminder text> \n **Category:** Utilities")
+        return embed
     if command._buckets and (cooldown := command._buckets._cooldown):
         saying = f"**Cooldown:** {cooldown.per:.0f} seconds \n"
     else:
