@@ -11,7 +11,7 @@ time_dict = {"h": 3600, "s": 1, "m": 60, "d": 86400}
 
 class TimeConverter(commands.Converter):
     async def convert(self, ctx: commands.Context, argument: str):
-        if argument.endswith('s') or argument.endswith('h') or argument.endswith('m') or argument.endswith('d'):
+        if (argument.endswith('s') or argument.endswith('h') or argument.endswith('m') or argument.endswith('d')) and (not argument.endswith('pm') or not argument.endswith('am')):
             get_unit = argument[-1]
             if get_unit in time_dict:
                 return time_dict[get_unit] * int(argument.rstrip(get_unit))
