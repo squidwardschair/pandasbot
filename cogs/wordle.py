@@ -91,7 +91,7 @@ class Wordle(commands.Cog, name="Wordle", description="Wordle! Guess the 5 lette
                     color = 'green'
                     yellows.append(c)
                     greens.append(ci)
-                    img = Image.open(f'gamedata/wordleimgs/{color}-{c}.png')
+                    img = Image.open(f'gamedata/wordleimgs/{color}-{c.lower()}.png')
                     board.paste(img, (x, y))
             for yi, yel in enumerate(word):
                 x = 20+(95*yi)
@@ -102,7 +102,7 @@ class Wordle(commands.Cog, name="Wordle", description="Wordle! Guess the 5 lette
                     color = 'yellow'
                 else:
                     color = "grey"
-                img = Image.open(f'gamedata/wordleimgs/{color}-{yel}.png')
+                img = Image.open(f'gamedata/wordleimgs/{color}-{yel.lower()}.png')
                 board.paste(img, (x, y))
         return board
 

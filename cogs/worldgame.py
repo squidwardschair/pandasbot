@@ -156,7 +156,7 @@ class WorldleGame:
         embed.set_footer(
             text=f"{ctx.author}'s Worldle • Credit to Regis Freyd for the country images")
         img = discord.File(
-            f'gamedata/countryimgs/{self.country}.png', filename="image.png")
+            f'gamedata/countryimgs/{self.country.lower()}.png', filename="image.png")
         embed.set_image(url="attachment://image.png")
         return embed, img
 
