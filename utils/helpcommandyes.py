@@ -2,12 +2,20 @@ import discord
 from discord.ext.commands import Context, Command, HelpCommand, Cog
 from difflib import get_close_matches
 from typing import Mapping, Optional, List
+from typing import Union
 
 COG_EMOJIS = {"Information": "ℹ️", "Utilities": "⚙️",
               "Fun": "🎉", "Games": "🎮", "Main Page": "❔"}
 
+class HelpView(discord.ui.View):
+    def __init__(self):
+        super().__init__(timeout=120)
+        self.message:Union[None, discord.Message]=None
 
-class HelpView(discord.ui.Select):
+    async def on_timeout(self):
+        await self.message.edit(view=None)
+
+class HelpSelect(discord.ui.Select):
     def __init__(self, embeddict, initiator):
         super().__init__(placeholder="Select a category")
         self.embeddict = embeddict
@@ -68,7 +76,7 @@ class myHelp(HelpCommand):
         return embed
 
     async def send_bot_help(self, mapping: Mapping[Optional[Cog], List[Command]]):
-        embed = discord.Embed(title="SquidwardBot Help", timestamp=discord.utils.utcnow(
+        embed = discord.Embed(title="Pandas Help", timestamp=discord.utils.utcnow(
         ), color=discord.Color.teal())
         usablecommands = 0
         ctx: Context = self.context
@@ -89,10 +97,10 @@ class myHelp(HelpCommand):
                 embed.add_field(
                     name=f'{cog.qualified_name} [{amountcommands}]', value=cog.description)
                 embeds[cog.qualified_name] = await self.create_embed(cog)
-        embeds['Games'] = [await self.create_game_embed(), "SquidwardBot's games made for Discord"]
-        embed.add_field(name="SquidwardBot Games", value="Play some fun and unique games on Discord while hanging out with friends! Find the best starting word with Wordle, play mindgames with Chess, scream at your friend in Connect 4, and use logic to fill out the orders with Bob Box Arcade!")
+        embeds['Games'] = [await self.create_game_embed(), "Pandas games made for Discord"]
+        embed.add_field(name="Pandas Games", value="Play some fun and unique games on Discord while hanging out with friends! Find the best starting word with Wordle, play mindgames with Chess, scream at your friend in Connect 4, and use logic to fill out the orders with Bob Box Arcade!")
         embed.set_thumbnail(url=ctx.me.display_avatar.url)
-        embed.description = f"**{ctx.guild.name}'s prefix:** `{ctx.clean_prefix}` \n **Total Commands:** {totalcommands} | **Usable Commands:** {usablecommands} \n ```diff\n+ Do !help [command] or !help for more information\n- <> is required | [] is optional\n+ Use the dropdown menu to navigate through the command categories!```"
+        embed.description = f"Pandas is a multi purpose bot designed to energize and engage a server. Read hilarious stories from Reddit, track where the ISS is, set reminders on Discord, and play games made for Discord.\n\n**{ctx.guild.name}'s prefix:** `{ctx.clean_prefix}` \n **Total Commands:** {totalcommands} | **Usable Commands:** {usablecommands} \n ```diff\n+ Do !help [command] or !help for more information\n- <> is required | [] is optional\n+ Use the dropdown menu to navigate through the command categories!```"
         embed.set_footer(text="Created by MrApples#2555",
                          icon_url="https://i.pinimg.com/564x/68/b0/6d/68b06dfca48a6a5fd8307d4a39dc3ef4.jpg")
         embed.set_author(name=str(ctx.author),
@@ -100,10 +108,11 @@ class myHelp(HelpCommand):
         tempdict = {"Main Page": [embed, "The main help page"]}
         embeds = {**tempdict, **embeds}
         print(embeds)
-        view = discord.ui.View(timeout=180)
-        view.add_item(HelpView(embeds, ctx.author))
-        await ctx.send(embed=embed, view=view)
-
+        view = HelpView()
+        view.add_item(HelpSelect(embeds, ctx.author))
+        msg=await ctx.send(embed=embed, view=view)
+        view.message=msg
+        
     async def send_cog_help(self, cog: Cog):
         if cog.qualified_name in self.games:
             await self.context.send(embed=await self.create_game_embed())
