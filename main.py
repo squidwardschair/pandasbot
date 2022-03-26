@@ -8,11 +8,6 @@ from utils.helpcommandyes import myHelp
 import json
 from typing import Dict, List, Tuple
 
-token = config.TESTINGTOKEN
-
-redditsecret, redditid = config.REDDITSECRET, config.REDDITID
-
-
 class SquidwardBot(commands.Bot):
     def __init__(self):
         super().__init__(intents=discord.Intents.all(), command_prefix=self.prefix,
@@ -104,4 +99,4 @@ async def block_dms(ctx: commands.Context):
     return ctx.guild is not None
 
 if __name__ == "__main__":
-    bot.run(config.TESTINGTOKEN)
+    bot.run(config.TOKEN)
