@@ -1,5 +1,4 @@
 from __future__ import annotations
-from turtle import update
 import discord
 from discord.ext import commands
 import time
