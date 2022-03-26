@@ -73,7 +73,7 @@ class RemindShorthandConverter(commands.Converter):
         return (discord.utils.utcnow()+timedelta(seconds=length), reason)
 
 
-async def command_help_format(command, ctx: commands.Context = None):
+async def command_help_format(command: str, ctx: commands.Context = None):
     if command == "permissions":
         embed = discord.Embed(title="Missing Permissions",
                               description="You are missing the required permissions to run this command!")

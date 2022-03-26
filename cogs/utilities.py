@@ -106,7 +106,7 @@ class Utilities(commands.Cog, name="Utilities", description="Utility commands to
     async def remind(self, ctx: commands.Context, *, reminder=None):
         remindernumber = await self.bot.db.fetchval("SELECT num FROM remindnum;")
         if reminder is None:
-            await ctx.send(embed=await command_help_format(ctx.command))
+            await ctx.send(embed=await command_help_format("remind", ctx))
             return
         converttry = await RemindShorthandConverter().convert(ctx, reminder)
         if converttry is None:
@@ -140,7 +140,7 @@ class Utilities(commands.Cog, name="Utilities", description="Utility commands to
     @commands.cooldown(rate=1, per=3, type=commands.BucketType.guild)
     async def deleteremind(self, ctx: commands.Context, remindernum: int = None):
         if remindernum is None:
-            await ctx.send(embed=await command_help_format(ctx.command))
+            await ctx.send(embed=await command_help_format(ctx.command, ctx))
             return
         if await self.bot.db.fetchval("SELECT * FROM reminders WHERE num = $1 AND member = $2;", remindernum, ctx.author.id) is None:
             await ctx.send("No reminders found! Make sure the reminder ID is correct, run `!showreminders` to check, and make sure the reminder is yours.")
