@@ -78,7 +78,7 @@ async def command_help_format(command, ctx: commands.Context = None):
         embed = discord.Embed(title="Missing Permissions",
                               description="You are missing the required permissions to run this command!")
         return embed
-    if command == "reminder":
+    if command == "remind":
         embed = discord.Embed(
             title="Command: remind", description=f"**Description:** Sets a reminder for yourself \n **Format:** {ctx.clean_prefix}remind <time - timedelta, timeshorthand, or time and date with timezone> <reminder text> \n **Category:** Utilities")
     if command._buckets and (cooldown := command._buckets._cooldown):
