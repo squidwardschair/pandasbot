@@ -236,14 +236,14 @@ class Connect4(commands.Cog, name="Connect 4", description="This fun board game 
         checkopponent = await request_game(ctx, f"{ctx.author} is challenging you to a game of Connect 4. You have 2 minutes to respond or the game will be automatically declined.", opponent)
         if checkopponent is False:
             return
-        await self.bot.db.execute("INSERT INTO chessgame VALUES ($1, $2, $3);", ctx.author.id, opponent.id, ctx.channel.id)
+        await self.bot.db.execute("INSERT INTO connect VALUES ($1, $2, $3);", ctx.author.id, opponent.id, ctx.channel.id)
         board = ConnectBoard([ctx.author, opponent], ctx)
         await board.start_game()
         while True:
             guess = await board.run_guess()
             if guess is False:
                 break
-        await self.bot.db.execute("DELETE FROM chessgame WHERE member1 = $1 AND member2 = $2 AND channel = $3;", ctx.author.id, opponent.id, ctx.channel.id)
+        await self.bot.db.execute("DELETE FROM connect WHERE member1 = $1 AND member2 = $2 AND channel = $3;", ctx.author.id, opponent.id, ctx.channel.id)
 
 
 async def setup(bot: SquidwardBot):
