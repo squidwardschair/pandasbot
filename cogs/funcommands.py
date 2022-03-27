@@ -6,13 +6,13 @@ from utils.imageedit import dumpy_get
 import random
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from main import SquidwardBot
+    from main import PandasBot
 
 
 class Fun(commands.Cog, name="Fun", description="Fun commands to play around and joke with!"):
 
     def __init__(self, bot):
-        self.bot: SquidwardBot = bot
+        self.bot: PandasBot = bot
 
     @commands.command(name="8ball", help="Runs a question through an 8ball.", brief="Runs a question through an 8ball.")
     @commands.cooldown(rate=1, per=3, type=commands.BucketType.guild)
@@ -148,5 +148,5 @@ class Fun(commands.Cog, name="Fun", description="Fun commands to play around and
 # TODO also add reddit stuff from nottheonion
 
 
-async def setup(bot: SquidwardBot):
+async def setup(bot: PandasBot):
     await bot.add_cog(Fun(bot))

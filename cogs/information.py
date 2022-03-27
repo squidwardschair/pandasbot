@@ -11,7 +11,7 @@ import datetime
 from typing import TYPE_CHECKING, Dict
 
 if TYPE_CHECKING:
-    from main import SquidwardBot
+    from main import PandasBot
 
 newsapikey = config.NEWSAPIKEY
 
@@ -19,7 +19,7 @@ newsapikey = config.NEWSAPIKEY
 class Information(commands.Cog, name="Information", description="Commands to get information from external sources or user content"):
 
     def __init__(self, bot):
-        self.bot: SquidwardBot = bot
+        self.bot: PandasBot = bot
 
     @commands.command(name="news", help="Gets top news headlines, using the NewsAPI", brief="Gets the top news")
     @commands.cooldown(rate=1, per=360, type=commands.BucketType.guild)
@@ -197,5 +197,5 @@ class Information(commands.Cog, name="Information", description="Commands to get
         await ctx.send(embed=embed)
 
 
-async def setup(bot: SquidwardBot):
+async def setup(bot: PandasBot):
     await bot.add_cog(Information(bot))

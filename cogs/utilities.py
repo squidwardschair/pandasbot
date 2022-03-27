@@ -6,13 +6,13 @@ from datetime import timedelta
 from utils.converters import RemindShorthandConverter, RemindTime, command_help_format
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from main import SquidwardBot
+    from main import PandasBot
 
 
 class Utilities(commands.Cog, name="Utilities", description="Utility commands to help the server in the wear and tear!"):
 
     def __init__(self, bot):
-        self.bot: SquidwardBot = bot
+        self.bot: PandasBot = bot
         self.type = "verified"
 
     @commands.command(name="reload", help="Reloads a cog (updates the changes)", brief="Reloads a cog")
@@ -242,5 +242,5 @@ class Utilities(commands.Cog, name="Utilities", description="Utility commands to
         await ctx.send(f"Unblacklisted {str(user)}")
 
 
-async def setup(bot: SquidwardBot):
+async def setup(bot: PandasBot):
     await bot.add_cog(Utilities(bot))

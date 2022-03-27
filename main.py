@@ -8,7 +8,7 @@ from utils.helpcommandyes import myHelp
 import json
 from typing import Dict, List, Tuple
 
-class SquidwardBot(commands.Bot):
+class PandasBot(commands.Bot):
     def __init__(self):
         super().__init__(intents=discord.Intents.all(), command_prefix=self.prefix,
                          case_insensitive=True, help_command=myHelp())
@@ -81,7 +81,7 @@ class SquidwardBot(commands.Bot):
             return await s.json()
 
 
-bot = SquidwardBot()
+bot = PandasBot()
 
 
 @bot.event

@@ -7,7 +7,7 @@ from utils.converters import command_help_format
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from main import SquidwardBot
+    from main import PandasBot
 
 
 class DisabledCommandYes(commands.CheckFailure):
@@ -16,7 +16,7 @@ class DisabledCommandYes(commands.CheckFailure):
 
 class CommandErrorHandler(commands.Cog):
     def __init__(self, bot):
-        self.bot: SquidwardBot = bot
+        self.bot: PandasBot = bot
         self.bot.add_check(self.blacklist)
         self.bot.add_check(self.disabled)
 
@@ -88,5 +88,5 @@ class CommandErrorHandler(commands.Cog):
         await ctx.send(embed=message, delete_after=None if iserror else 10)
 
 
-async def setup(bot: SquidwardBot):
+async def setup(bot: PandasBot):
     await bot.add_cog(CommandErrorHandler(bot))

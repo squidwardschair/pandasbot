@@ -8,7 +8,7 @@ from discord.ext import commands
 from typing import List, Dict, Tuple, TYPE_CHECKING
 import random
 if TYPE_CHECKING:
-    from main import SquidwardBot
+    from main import PandasBot
 
 
 class Submit(discord.ui.Modal):
@@ -193,7 +193,7 @@ class GuessSelect(discord.ui.Select):
 
 class Worldle(commands.Cog, name="Worldle", description="Worldle! A fun variation on the game Wordle (which this bot has, by the way), you have 6 tries to guess the right country or territory based on the image of its outline that's shown. Each guess, you'll be shown the distance your guess is from the correct answer, and the direction that the correct guess from your guess. For more information about how to play, use the help button on the game menu when you run the command. Happy worldling!"):
     def __init__(self, bot):
-        self.bot: SquidwardBot = bot
+        self.bot: PandasBot = bot
 
     async def check_db(self, ctx: commands.Context):
         if await self.bot.db.fetchval("SELECT * FROM worldgame WHERE member=$1 AND channel=$2;", ctx.author.id, ctx.channel.id):
@@ -241,5 +241,5 @@ class Worldle(commands.Cog, name="Worldle", description="Worldle! A fun variatio
         await self.bot.db.execute("DELETE FROM worldgame WHERE member=$1 AND channel=$2;", ctx.author.id, ctx.channel.id)
 
 
-async def setup(bot: SquidwardBot):
+async def setup(bot: PandasBot):
     await bot.add_cog(Worldle(bot))

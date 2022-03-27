@@ -9,7 +9,7 @@ from utils.gameutils import request_game, get_other_player
 from typing import TYPE_CHECKING, Union, List
 
 if TYPE_CHECKING:
-    from main import SquidwardBot
+    from main import PandasBot
 
 """
 1. Refactor the hot mess of connect 4
@@ -209,7 +209,7 @@ class ConnectButtons(discord.ui.View):
 class Connect4(commands.Cog, name="Connect 4", description="This fun board game has been recreated on Discord! Alternate between dropping red and yellow pieces down on a board to try and form 4 in a row."):
 
     def __init__(self, bot):
-        self.bot:SquidwardBot = bot
+        self.bot:PandasBot = bot
 
     async def check_db(self, ctx: commands.Context, opponent: discord.Member):
         if await self.bot.db.fetchval("SELECT member1 FROM connect WHERE ((member1 = $1 OR member1 = $2) OR (member2 = $1 OR member2 = $2)) AND channel = $3", ctx.author.id, opponent.id, ctx.channel.id):
@@ -246,5 +246,5 @@ class Connect4(commands.Cog, name="Connect 4", description="This fun board game 
         await self.bot.db.execute("DELETE FROM connect WHERE member1 = $1 AND member2 = $2 AND channel = $3;", ctx.author.id, opponent.id, ctx.channel.id)
 
 
-async def setup(bot: SquidwardBot):
+async def setup(bot: PandasBot):
     await bot.add_cog(Connect4(bot))

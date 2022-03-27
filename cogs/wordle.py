@@ -9,7 +9,7 @@ import asyncio
 import datetime
 from typing import TYPE_CHECKING, List
 if TYPE_CHECKING:
-    from main import SquidwardBot
+    from main import PandasBot
 
 
 class Submit(discord.ui.Modal):
@@ -76,7 +76,7 @@ class WordleView(discord.ui.View):
 
 class Wordle(commands.Cog, name="Wordle", description="Wordle! Guess the 5 letter word in 6 tries, using the hints given to you :). A random Wordle from the past (not todays), will be selected for you to solve. Type your guess into the chat, but make sure its a valid 5 letter word. Use the help button if you don't know how to play. Happy wordling!"):
     def __init__(self, bot):
-        self.bot: SquidwardBot = bot
+        self.bot: PandasBot = bot
 
     def do_word(self, words: List[str], checkword: str, board: Image.Image):
         if not words:
@@ -227,5 +227,5 @@ class Wordle(commands.Cog, name="Wordle", description="Wordle! Guess the 5 lette
         await self.bot.db.execute("DELETE FROM wordle WHERE member=$1 AND channel=$2;", ctx.author.id, ctx.channel.id)
 
 
-async def setup(bot: SquidwardBot):
+async def setup(bot: PandasBot):
     await bot.add_cog(Wordle(bot))

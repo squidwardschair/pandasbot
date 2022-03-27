@@ -9,7 +9,7 @@ from utils.factoryparts import FactoryParts
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from main import SquidwardBot
+    from main import PandasBot
 
 levels = FactoryParts.levels
 
@@ -293,7 +293,7 @@ class LevelPick(discord.ui.View):
 class Sokoban(commands.Cog, name="Bob Box Arcade Sokoban Game", description="Sokoban is a puzzle game that looks easier then it seems. You are Bob, trying to deliver packages to the correct spots in the warehouse. You will be on a board where you will have to push boxes around obstacles to reach them to the right spots. There are 24 fun levels for you to play, so get those boxes moving!"):
 
     def __init__(self, bot):
-        self.bot: SquidwardBot = bot
+        self.bot: PandasBot = bot
 
     async def run_game(self, ctx: commands.Context, level: int, embed: discord.Embed):
         edit = False
@@ -395,5 +395,5 @@ class Sokoban(commands.Cog, name="Bob Box Arcade Sokoban Game", description="Sok
                         return
 
 
-async def setup(bot: SquidwardBot):
+async def setup(bot: PandasBot):
     await bot.add_cog(Sokoban(bot))

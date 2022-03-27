@@ -1,14 +1,14 @@
 import discord
 from datetime import timedelta
 from discord.ext import commands, tasks
-from main import SquidwardBot
+from main import PandasBot
 from io import BytesIO
 import config
 
 
 class BackgroundTasks(commands.Cog):
     def __init__(self, bot):
-        self.bot: SquidwardBot = bot
+        self.bot: PandasBot = bot
         self.remind.start()
         self.get_iss.start()
 
@@ -68,5 +68,5 @@ class BackgroundTasks(commands.Cog):
         await self.bot.wait_until_ready()
 
 
-async def setup(bot: SquidwardBot):
+async def setup(bot: PandasBot):
     await bot.add_cog(BackgroundTasks(bot))

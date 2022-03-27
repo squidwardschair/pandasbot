@@ -14,7 +14,7 @@ from utils.chessgameutils import ChessMenu, ChessPlayer, Draw, Resignation, Time
 from typing import List, Tuple, Union, TYPE_CHECKING
 from aiohttp import ClientSession
 if TYPE_CHECKING:
-    from main import SquidwardBot
+    from main import PandasBot
 
 OUTCOMES = {1: "Checkmate", 2: "Stalemate", 3: "Insufficent Material", 4: "75 Moves",
             5: "Fivefold Repetition", 6: "50 Move Rule", 7: "Threefold Repetition"}
@@ -26,7 +26,7 @@ TIMECONTROLS = {"25 + 0": [25, False], "10 + 0": [10, False], "5 + 0": [5, False
 class Chess(commands.Cog, name="Chess", description="The classic battle of the inner brains is on Discord! Test your Chess skills by challenging other members, and play against engines to sharpen these skills. Made so playing on Discord is very easy and enjoyable, play while talking with your friends!"):
 
     def __init__(self, bot):
-        self.bot: SquidwardBot = bot
+        self.bot: PandasBot = bot
 
     async def check_db(self, ctx: commands.Context, opponent: discord.Member):
         if await self.bot.db.fetchval("SELECT member1 FROM chessgame WHERE ((member1 = $1 OR member1 = $2) OR (member2 = $1 OR member2 = $2)) AND channel = $3", ctx.author.id, opponent.id, ctx.channel.id):
@@ -233,5 +233,5 @@ class ChessGame:
                 return
 
 
-async def setup(bot: SquidwardBot):
+async def setup(bot: PandasBot):
     await bot.add_cog(Chess(bot))
