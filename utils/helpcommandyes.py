@@ -105,6 +105,7 @@ class myHelp(HelpCommand):
                          icon_url="https://i.pinimg.com/564x/68/b0/6d/68b06dfca48a6a5fd8307d4a39dc3ef4.jpg")
         embed.set_author(name=str(ctx.author),
                          icon_url=ctx.author.display_avatar.url)
+        embed.url="https://github.com/squidwardschair/pandasbot/blob/main/README.md"
         tempdict = {"Main Page": [embed, "The main help page"]}
         embeds = {**tempdict, **embeds}
         print(embeds)
