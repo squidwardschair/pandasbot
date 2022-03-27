@@ -15,7 +15,7 @@ class PandasBot(commands.Bot):
         self.uptime = None
         self.db: asyncpg.Pool = None
         self.session: aiohttp.ClientSession = None
-        self.default_prefix = "a!"
+        self.default_prefix = "p!"
         self.wordlewords = None
         self.wordleanswers = None
         self.countries = None
