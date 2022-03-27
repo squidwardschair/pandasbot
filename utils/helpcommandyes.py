@@ -53,7 +53,7 @@ class myHelp(HelpCommand):
         commandyes = cog.get_commands()
         filtercommands = await self.filter_commands(commandyes, sort=True)
         embed = discord.Embed(title=f"{cog.qualified_name} Category Help", description=description,
-                              timestamp=discord.utils.utcnow(), color=discord.Color.teal())
+                              timestamp=discord.utils.utcnow(), color=discord.Color.dark_magenta())
         for command in filtercommands:
             embed.add_field(
                 name=f"`{self.get_command_signature(command)}`", value=command.brief, inline=True)
@@ -64,7 +64,7 @@ class myHelp(HelpCommand):
 
     async def create_game_embed(self):
         embed = discord.Embed(title="Pandas Games", description="A variety of fun games to play on your own and with friends, play one of these while hanging out and chatting in your server!",
-                              timestamp=discord.utils.utcnow(), color=discord.Color.teal())
+                              timestamp=discord.utils.utcnow(), color=discord.Color.dark_magenta())
         for name in self.games:
             cog: Cog = self.context.bot.get_cog(name)
             embed.add_field(name=f"{self.games[name]}{cog.qualified_name}{self.games[name]}",
@@ -77,7 +77,7 @@ class myHelp(HelpCommand):
 
     async def send_bot_help(self, mapping: Mapping[Optional[Cog], List[Command]]):
         embed = discord.Embed(title="Pandas Help", timestamp=discord.utils.utcnow(
-        ), color=discord.Color.teal())
+        ), color=discord.Color.dark_magenta())
         usablecommands = 0
         ctx: Context = self.context
         totalcommands = len(ctx.bot.commands)
@@ -121,7 +121,7 @@ class myHelp(HelpCommand):
         ctx = self.context
         description = cog.description or "No description."
         embed = discord.Embed(title=f"{cog.qualified_name} Category Help", description=description,
-                              timestamp=discord.utils.utcnow(), color=discord.Color.teal())
+                              timestamp=discord.utils.utcnow(), color=discord.Color.dark_magenta())
         commands = cog.get_commands()
         filtercommands = await self.filter_commands(commands, sort=True)
         amountcommands = len(filtercommands)
