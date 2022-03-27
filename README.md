@@ -1,6 +1,6 @@
 ![pandaslogo2](https://user-images.githubusercontent.com/87884769/160262150-85738e6c-4e44-4100-8872-1eb6a583e250.png)
 # Pandas Discord Bot 
-###### Created by MrApples#2555
+##### Created by MrApples#2555
 
 Pandas is a multi-purpose Discord bot with a variety of features to make your server experiences much more fun. 
 
