@@ -2,7 +2,7 @@
 # Pandas Discord Bot 
 ##### Created by MrApples#2555
 
-Pandas is a multi-purpose Discord bot with a variety of features to make your server experiences much more fun. 
+Pandas is a multi-purpose Discord bot with a variety of features to make your server experiences much more fun. **Invite it to your server [here](https://discord.com/api/oauth2/authorize?client_id=957378723064213575&permissions=274945403968&scope=bot).**
 
 ## Games
 #### Bob Box Arcade
