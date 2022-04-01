@@ -9,7 +9,7 @@ class GameRequest(discord.ui.View):
         self.accepter = accepter
 
     @discord.ui.button(label="Accept Match", style=discord.ButtonStyle.green)
-    async def accept(self, button: discord.ui.Button, interaction: discord.Interaction = discord.Interaction):
+    async def accept(self, interaction: discord.Interaction, button: discord.ui.Button):
         if interaction.user.id != self.accepter.id:
             await interaction.response.send_message("This request is not for you!", ephemeral=True)
             return
@@ -17,7 +17,7 @@ class GameRequest(discord.ui.View):
         self.stop()
 
     @discord.ui.button(label="Deny Match", style=discord.ButtonStyle.red)
-    async def deny(self, button: discord.ui.Button, interaction: discord.Interaction = discord.Interaction):
+    async def deny(self, interaction: discord.Interaction, button: discord.ui.Button):
         if interaction.user.id != self.accepter.id:
             await interaction.response.send_message("This request is not for you!", ephemeral=True)
             return

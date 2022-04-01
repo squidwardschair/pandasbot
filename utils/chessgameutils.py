@@ -191,7 +191,7 @@ class ChessMenu(discord.ui.View):
         self.boardmsg = boardmsg
 
     @discord.ui.button(label="Move", style=discord.ButtonStyle.green)
-    async def open_modal(self, button: discord.Button, interaction: discord.Interaction):
+    async def open_modal(self, interaction: discord.Interaction, button: discord.ui.Button):
         modal = Submit(self.board)
         await interaction.response.send_modal(modal)
         try:
@@ -209,7 +209,7 @@ class ChessMenu(discord.ui.View):
         self.stop()
 
     @discord.ui.button(label='Draw', style=discord.ButtonStyle.green)
-    async def draw(self, button: discord.ui.Button, interaction: discord.Interaction = discord.Interaction):
+    async def draw(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer()
         self.drawaccepter = get_other_player(self.turnmem, self.players)
         drawresult, message = await button_confirm(self.drawaccepter.member, interaction.channel, f"{interaction.user.mention} requested a draw! {self.drawaccepter.member.mention}. __Do you accept the draw?__ You have 15 seconds or the draw will be automatically declined.", timeout=15)
@@ -226,7 +226,7 @@ class ChessMenu(discord.ui.View):
             await message.edit(view=None)
 
     @discord.ui.button(label='Resign', style=discord.ButtonStyle.red)
-    async def Resign(self, button: discord.ui.Button, interaction: discord.Interaction = discord.Interaction):
+    async def Resign(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer()
         resignresult, message = await followup_confirm(
             interaction, 'Are you sure you wish to resign?', timeout=15
@@ -240,7 +240,7 @@ class ChessMenu(discord.ui.View):
             await message.edit(content="Resignation cancelled.", view=None)
 
     @discord.ui.button(label="Chess Timer", style=discord.ButtonStyle.gray, custom_id="timer")
-    async def time(self, button: discord.ui.Button, interaction: discord.Interaction = discord.Interaction):
+    async def time(self, interaction: discord.Interaction, button: discord.ui.Button):
         turn, notturn = self.turnmem, get_other_player(
             self.turnmem, self.players)
         embed = discord.Embed(title=f"🕒 Chess Timer for {turn.member} vs. {notturn.member}",
@@ -250,7 +250,7 @@ class ChessMenu(discord.ui.View):
         await interaction.response.send_message(embed=embed, ephemeral=True)
 
     @discord.ui.button(label="Resend Board", style=discord.ButtonStyle.gray)
-    async def resend(self, button: discord.ui.Button, interaction: discord.Interaction = discord.Interaction):
+    async def resend(self, interaction: discord.Interaction, button: discord.ui.Button):
         message = await interaction.response.send_message(embed=self.embed)
         self.message = message
         await self.boardmsg.delete()

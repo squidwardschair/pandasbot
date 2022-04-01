@@ -161,43 +161,43 @@ class ConnectButtons(discord.ui.View):
         self.names = ["A", "B", "C", "D", "E", "F", "G"]
 
     @discord.ui.button(label="A", style=discord.ButtonStyle.green, custom_id="A")
-    async def blue(self, button: discord.ui.Button, interaction=discord.Interaction):
+    async def blue(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer()
         self.result = 0
         self.stop()
 
     @discord.ui.button(label="B", style=discord.ButtonStyle.green, custom_id="B")
-    async def yellow(self, button: discord.ui.Button, interaction=discord.Interaction):
+    async def yellow(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer()
         self.result = 1
         self.stop()
 
     @discord.ui.button(label="C", style=discord.ButtonStyle.green, custom_id="C")
-    async def green(self, button: discord.ui.Button, interaction=discord.Interaction):
+    async def green(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer()
         self.result = 2
         self.stop()
 
     @discord.ui.button(label="D", style=discord.ButtonStyle.green, custom_id="D")
-    async def red(self, button: discord.ui.Button, interaction=discord.Interaction):
+    async def red(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer()
         self.result = 3
         self.stop()
 
     @discord.ui.button(label="E", style=discord.ButtonStyle.green, custom_id="E")
-    async def sdfg(self, button: discord.ui.Button, interaction=discord.Interaction):
+    async def sdfg(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer()
         self.result = 4
         self.stop()
 
     @discord.ui.button(label="F", style=discord.ButtonStyle.green, custom_id="F")
-    async def fdsa(self, button: discord.ui.Button, interaction=discord.Interaction):
+    async def fdsa(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer()
         self.result = 5
         self.stop()
 
     @discord.ui.button(label="G", style=discord.ButtonStyle.green, custom_id="G")
-    async def gsdfg(self, button: discord.ui.Button, interaction=discord.Interaction):
+    async def gsdfg(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer()
         self.result = 6
         self.stop()

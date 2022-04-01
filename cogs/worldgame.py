@@ -43,7 +43,7 @@ class WorldleView(discord.ui.View):
         self.cancel = False
 
     @discord.ui.button(label="Guess", style=discord.ButtonStyle.green)
-    async def open_modal(self, button: discord.Button, interaction: discord.Interaction):
+    async def open_modal(self, interaction: discord.Interaction, button: discord.ui.Button):
         modal = Submit(self.countries)
         await interaction.response.send_modal(modal)
         try:
@@ -57,12 +57,12 @@ class WorldleView(discord.ui.View):
         self.stop()
 
     @discord.ui.button(emoji="🛑", style=discord.ButtonStyle.grey)
-    async def deny(self, button: discord.Button, interaction=discord.Interaction):
+    async def deny(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.cancel = True
         self.stop()
 
     @discord.ui.button(emoji="❓")
-    async def ask(self, button: discord.Button, interaction: discord.Interaction = discord.Interaction):
+    async def ask(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.send_message("https://i.gyazo.com/ca92c09a446236b9b3c2f1726badcf06.jpg", ephemeral=True)
 
     async def interaction_check(self, interaction: discord.Interaction):

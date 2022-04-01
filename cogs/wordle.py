@@ -51,7 +51,7 @@ class WordleView(discord.ui.View):
         self.stop()
 
     @discord.ui.button(label="Guess", style=discord.ButtonStyle.green)
-    async def open_modal(self, button: discord.Button, interaction: discord.Interaction):
+    async def open_modal(self, interaction: discord.Interaction, button: discord.ui.Button):
         modal = Submit(self.words)
         await interaction.response.send_modal(modal)
         try:
@@ -65,12 +65,12 @@ class WordleView(discord.ui.View):
         self.stop()
 
     @discord.ui.button(emoji="🛑", style=discord.ButtonStyle.grey)
-    async def deny(self, button: discord.Button, interaction=discord.Interaction):
+    async def deny(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.result = False
         self.stop()
 
     @discord.ui.button(emoji="❓")
-    async def ask(self, button: discord.Button, interaction: discord.Interaction = discord.Interaction):
+    async def ask(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.send_message("https://i.gyazo.com/056333baacef7643aadd8189260dde9c.png", ephemeral=True)
 
 

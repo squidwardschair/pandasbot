@@ -27,17 +27,17 @@ class ButtonPaginator(discord.ui.View):
         await self.message.edit(view=None)
 
     @discord.ui.button(emoji="⏮️")
-    async def fullbackwards(self, button: discord.Button, interaction: discord.Interaction = discord.Interaction):
+    async def fullbackwards(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.currentindex = 0
         await interaction.response.edit_message(embed=self.embeds[self.currentindex])
 
     @discord.ui.button(emoji="⬅️")
-    async def backwards(self, button: discord.Button, interaction: discord.Interaction = discord.Interaction):
+    async def backwards(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.currentindex = self.currentindex-1 if self.currentindex >= 1 else -1
         await interaction.response.edit_message(embed=self.embeds[self.currentindex])
 
     @discord.ui.button(emoji="➡️")
-    async def forwards(self, button: discord.Button, interaction: discord.Interaction = discord.Interaction):
+    async def forwards(self, interaction: discord.Interaction, button: discord.ui.Button):
         try:
             self.embeds[self.currentindex+1]
             self.currentindex = self.currentindex+1
@@ -46,12 +46,12 @@ class ButtonPaginator(discord.ui.View):
         await interaction.response.edit_message(embed=self.embeds[self.currentindex])
 
     @discord.ui.button(emoji="⏭️")
-    async def fullforwards(self, button: discord.Button, interaction: discord.Interaction = discord.Interaction):
+    async def fullforwards(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.currentindex = len(self.embeds)-1
         await interaction.response.edit_message(embed=self.embeds[self.currentindex])
 
     @discord.ui.button(emoji="🛑")
-    async def stop(self, button: discord.Button, interaction=discord.Interaction):
+    async def stop(self, interaction: discord.Interaction, button: discord.ui.Button):
         await self.message.edit(view=None)
 
 
@@ -68,12 +68,12 @@ class ButtonConfirmation(discord.ui.View):
         return False
 
     @discord.ui.button(emoji="✔️", style=discord.ButtonStyle.green)
-    async def confirm(self, button: discord.Button, interaction=discord.Interaction):
+    async def confirm(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.result = True
         self.stop()
 
     @discord.ui.button(emoji="✖️", style=discord.ButtonStyle.red)
-    async def deny(self, button: discord.Button, interaction=discord.Interaction):
+    async def deny(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.result = False
         self.stop()
 

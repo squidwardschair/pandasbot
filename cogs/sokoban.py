@@ -157,42 +157,42 @@ class MoveButtons(discord.ui.View):
             self.stop()
 
     @discord.ui.button(emoji="🔸", style=discord.ButtonStyle.gray, row=0, disabled=True)
-    async def nonea(self, button: discord.ui.Button, interaction: discord.Interaction = discord.Interaction):
+    async def nonea(self, interaction: discord.Interaction, button: discord.ui.Button):
         pass
 
     @discord.ui.button(emoji="⬆️", style=discord.ButtonStyle.blurple, row=0)
-    async def up(self, button: discord.ui.Button, interaction: discord.Interaction = discord.Interaction):
+    async def up(self, interaction: discord.Interaction, button: discord.ui.Button):
         await self.move("w", interaction)
 
     @discord.ui.button(emoji="🔸", style=discord.ButtonStyle.gray, row=0, disabled=True)
-    async def noneaa(self, button: discord.ui.Button, interaction=discord.Interaction):
+    async def noneaa(self, interaction: discord.Interaction, button: discord.ui.Button):
         pass
 
     @discord.ui.button(emoji="⬅️", style=discord.ButtonStyle.blurple, row=1)
-    async def left(self, button: discord.ui.Button, interaction: discord.Interaction = discord.Interaction):
+    async def left(self, interaction: discord.Interaction, button: discord.ui.Button):
         await self.move("a", interaction)
 
     @discord.ui.button(emoji="⬇️", style=discord.ButtonStyle.blurple, row=1)
-    async def down(self, button: discord.ui.Button, interaction: discord.Interaction = discord.Interaction):
+    async def down(self, interaction: discord.Interaction, button: discord.ui.Button):
         await self.move("s", interaction)
 
     @discord.ui.button(emoji="➡️", style=discord.ButtonStyle.blurple, row=1)
-    async def right(self, button: discord.ui.Button, interaction: discord.Interaction = discord.Interaction):
+    async def right(self, interaction: discord.Interaction, button: discord.ui.Button):
         await self.move("d", interaction)
 
     @discord.ui.button(label="Reset", style=discord.ButtonStyle.red, row=2)
-    async def reset(self, button: discord.ui.Button, interaction: discord.Interaction = discord.Interaction):
+    async def reset(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.result = True
         self.stop()
 
     @discord.ui.button(label="Cancel", style=discord.ButtonStyle.red, row=2)
-    async def cancel(self, button: discord.ui.Button, interaction: discord.Interaction = discord.Interaction):
+    async def cancel(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.send_message("Game cancelled.", ephemeral=True)
         self.result = False
         self.stop()
 
     @discord.ui.button(label="Return to Menu", style=discord.ButtonStyle.red, row=2)
-    async def menureturn(self, button: discord.ui.Button, interaction: discord.Interaction = discord.Interaction):
+    async def menureturn(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.result = "return"
         self.stop()
 
@@ -213,12 +213,12 @@ class ContinueButtons(discord.ui.View):
             self.add_item(ContinueButton())
 
     @discord.ui.button(label="Return to Menu", style=discord.ButtonStyle.gray)
-    async def menu(self, button: discord.ui.Button, interaction: discord.Interaction = discord.Interaction):
+    async def menu(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.result = "return"
         self.stop()
 
     @discord.ui.button(label="Cancel Game", style=discord.ButtonStyle.gray)
-    async def cancel(self, button: discord.ui.Button, interaction: discord.Interaction = discord.Interaction):
+    async def cancel(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.send_message("Game cancelled.", ephemeral=True)
         self.result = False
         self.stop()
