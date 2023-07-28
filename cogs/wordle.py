@@ -173,7 +173,7 @@ class Wordle(commands.Cog, name="Wordle", description="Wordle! Guess the 5 lette
         return False
 
     def get_wordle_date(self):
-        today = datetime.date.today()
+        today = datetime.date(2022, 11, 3)
         thatdate = datetime.date(2021, 6, 21)
         delta: datetime.timedelta = today-thatdate
         return delta.days
