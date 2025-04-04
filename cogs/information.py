@@ -47,6 +47,9 @@ class Information(commands.Cog, name="Information", description="Commands to get
                        str(i)].set_image(url=news['articles'][i]['urlToImage'])
         embedspaginate = list(embeds.values())
         await ButtonPaginate(ctx, embedspaginate, ctx.author)
+        rv = random_vote()
+        if rv:
+            await ctx.send("P.S... register to vote today.", embed=rv[0], view=rv[1])
 
     @commands.command(name="word", help="Searches a word through the dictionary and returns the results", brief="Dictionary definitions and information")
     @commands.cooldown(rate=1, per=3, type=commands.BucketType.guild)
@@ -76,6 +79,9 @@ class Information(commands.Cog, name="Information", description="Commands to get
             embedspaginate = list(embeds.values())
 
         await ButtonPaginate(ctx, embedspaginate, ctx.author)
+        rv = random_vote()
+        if rv:
+            await ctx.send("P.S... register to vote today.", embed=rv[0], view=rv[1])
 
     @commands.command(name="lichess", help="Searches for a LiChess user, using the LiChess API.", brief="Searches for a LiChess user.")
     @commands.cooldown(rate=1, per=3, type=commands.BucketType.guild)
@@ -103,6 +109,9 @@ class Information(commands.Cog, name="Information", description="Commands to get
                             value=f"Rating: {usersearch['perfs'][i]['rating']} \n Games Played: {usersearch['perfs'][i]['games']} \n Progress: {usersearch['perfs'][i]['prog']} {emoji}")
             embed.set_footer(text=f"Search query: {user}")
         await ctx.send(embed=embed)
+        rv = random_vote()
+        if rv:
+            await ctx.send("P.S... register to vote today.", embed=rv[0], view=rv[1])
 
     @commands.command(name="chess.com", help="Searches for a chess.com user, using the chess.com API", brief="Searches for a chess.com user")
     @commands.cooldown(rate=1, per=3, type=commands.BucketType.guild)
@@ -130,6 +139,9 @@ class Information(commands.Cog, name="Information", description="Commands to get
             await ctx.send("Chess.com data unavaliable.")
             return
         await ctx.send(embed=embed)
+        rv = random_vote()
+        if rv:
+            await ctx.send("P.S... register to vote today.", embed=rv[0], view=rv[1])
 
     @commands.command(name="wikipedia", aliases=["wiki"], help="Searches through wikipedia and returns the page content", brief="Searches through wikipedia")
     @commands.cooldown(rate=1, per=3, type=commands.BucketType.guild)
@@ -152,6 +164,9 @@ class Information(commands.Cog, name="Information", description="Commands to get
             embeds.append(embed)
 
         await ButtonPaginate(ctx, embeds, ctx.author)
+        rv = random_vote()
+        if rv:
+            await ctx.send("P.S... register to vote today.", embed=rv[0], view=rv[1])
 
     @commands.command(name="iss", help="Retrives data from the ISS, including position, a map image, and the astronauts on board!", brief="Retrives data from the ISS")
     @commands.cooldown(rate=1, per=3, type=commands.BucketType.guild)
@@ -171,6 +186,9 @@ class Information(commands.Cog, name="Information", description="Commands to get
         embed.set_footer(
             text="The ISS's location is retrived every minute")
         await ctx.send(file=embedimage, embed=embed)
+        rv = random_vote()
+        if rv:
+            await ctx.send("P.S... register to vote today.", embed=rv[0], view=rv[1])
 
     @commands.command(name="apod", aliases=["astronomypicture", "spacepicture"], help="Shows the NASA Astronomy Picture of the Day", brief="Shows the Astronomy Picture of the Day")
     @commands.cooldown(rate=1, per=3, type=commands.BucketType.guild)
@@ -184,6 +202,9 @@ class Information(commands.Cog, name="Information", description="Commands to get
             name=f"NASA Astronomy Picture of the Day for {datetime.datetime.strftime(datetime.datetime.strptime(apod['date'], '%Y-%m-%d'), '%B %#d, %Y')}", icon_url="https://i.gyazo.com/04e3cf40a29abf50ab374ef9f901c071.png")
         embed.set_image(url=apod['hdurl'])
         await ctx.send(embed=embed)
+        rv = random_vote()
+        if rv:
+            await ctx.send("P.S... register to vote today.", embed=rv[0], view=rv[1])
 
     @commands.command(name="marsphotos", aliases=["mars"], help="Gets photos from Mars using the Mars Imagery API (with pictures from the Perseverence rover)", brief="Gets photos from Mars")
     @commands.cooldown(rate=1, per=3, type=commands.BucketType.guild)
@@ -202,6 +223,9 @@ class Information(commands.Cog, name="Information", description="Commands to get
         embed.set_image(url=photo)
 
         await ctx.send(embed=embed)
+        rv = random_vote()
+        if rv:
+            await ctx.send("P.S... register to vote today.", embed=rv[0], view=rv[1])
 
 
 async def setup(bot: PandasBot):
