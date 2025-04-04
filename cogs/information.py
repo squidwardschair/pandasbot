@@ -9,7 +9,7 @@ import random
 from utils.viewutils import ButtonPaginate
 import datetime
 from typing import TYPE_CHECKING, Dict
-from utils.voteutils import vote_embed
+from utils.voteutils import vote_embed, random_vote
 
 if TYPE_CHECKING:
     from main import PandasBot
