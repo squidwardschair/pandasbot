@@ -9,6 +9,7 @@ import random
 from utils.viewutils import ButtonPaginate
 import datetime
 from typing import TYPE_CHECKING, Dict
+from utils.voteutils import vote_embed
 
 if TYPE_CHECKING:
     from main import PandasBot
@@ -21,6 +22,12 @@ class Information(commands.Cog, name="Information", description="Commands to get
     def __init__(self, bot):
         self.bot: PandasBot = bot
 
+    @commands.command(name="vote", help="Only 69.1 percent of U.S eligible voters are registered to vote. Just over half have actually voted in the last presidential election, and this percentage drops for local and midterm elections. The United States ranks 31st in voter turnout for OCED countries, behind countries like Poland, Slovakia, and Brazil. Be part of the solution and register to vote today.", brief="Learn how to register to vote.")
+    @commands.cooldown(rate=1, per=3, type=commands.BucketType.guild)
+    async def vote(self, ctx: commands.Context):
+        embed, view = vote_embed()
+        await ctx.reply(embed=embed, view=view)
+        
     @commands.command(name="news", help="Gets top news headlines, using the NewsAPI", brief="Gets the top news")
     @commands.cooldown(rate=1, per=360, type=commands.BucketType.guild)
     async def news(self, ctx: commands.Context):
