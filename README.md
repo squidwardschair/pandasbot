@@ -5,7 +5,7 @@
 Pandas is a multi-purpose Discord bot with a variety of features to make your server experiences much more fun. **Invite it to your server [here](https://discord.com/api/oauth2/authorize?client_id=957378723064213575&permissions=274945403968&scope=bot).**
 
 ## Voter Registration Awareness
-PandasBot will be providing users who play our games and use our "fun" commands information about voter registration in an effort to spread civic awareness and education. Users also have the opportunity to use the `!vote` command to obtain valuable information regarding voter registration.
+PandasBot will be providing users who play our games and use our "fun" commands information about voter registration in an effort to spread civic awareness and education. These voter registration reminders will be sent at random for those who use these commands at a 50% rate. Users also have the opportunity to use the `!vote` command to directly obtain valuable information regarding voter registration.
 
 ![image](https://github.com/user-attachments/assets/54aff997-cbdc-43a0-a1ee-934818845c27)
 
