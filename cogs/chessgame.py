@@ -13,6 +13,7 @@ from utils.viewutils import list_select, list_buttons
 from utils.chessgameutils import ChessMenu, ChessPlayer, Draw, Resignation, TimeResign, ChessBoard, ChessEmbed, get_pgn, get_move
 from typing import List, Tuple, Union, TYPE_CHECKING
 from aiohttp import ClientSession
+from utils.voteutils import random_vote
 if TYPE_CHECKING:
     from main import PandasBot
 
@@ -181,6 +182,10 @@ class ChessGame:
         await self.gamemsg.delete()
         embed = await self.winning_embed(saying, self.move, analysis)
         await self.ctx.send(embed=embed)
+        rv = random_vote()
+        if rv:
+            await ctx.send("P.S... register to vote today.", embed=rv[0], view=rv[1])
+
 
     async def player_move(self):
         side = self.curplayer

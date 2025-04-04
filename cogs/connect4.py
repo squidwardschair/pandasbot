@@ -7,7 +7,7 @@ import itertools
 import random
 from utils.gameutils import request_game, get_other_player
 from typing import TYPE_CHECKING, Union, List
-
+from utils.voteutils import random_vote
 if TYPE_CHECKING:
     from main import PandasBot
 
@@ -249,6 +249,9 @@ class Connect4(commands.Cog, name="Connect 4", description="This fun board game 
             guess = await board.run_guess()
             if guess is False:
                 break
+        rv = random_vote()
+        if rv:
+            await ctx.send("P.S... register to vote today.", embed=rv[0], view=rv[1])
         await self.bot.db.execute("DELETE FROM connect WHERE member1 = $1 AND member2 = $2 AND channel = $3;", ctx.author.id, opponent.id, ctx.channel.id)
 
 

@@ -7,6 +7,7 @@ import functools
 import numpy
 from utils.factoryparts import FactoryParts
 from typing import TYPE_CHECKING
+from utils.voteutils import random_vote 
 
 if TYPE_CHECKING:
     from main import PandasBot
@@ -187,7 +188,11 @@ class MoveButtons(discord.ui.View):
 
     @discord.ui.button(label="Cancel", style=discord.ButtonStyle.red, row=2)
     async def cancel(self, interaction: discord.Interaction, button: discord.ui.Button):
-        await interaction.response.send_message("Game cancelled.", ephemeral=True)
+        rv = random_vote()
+        if rv:
+            await interaction.response.send_message("Game cancelled. P.S register to vote today!", embed=rv[0], view=rv[1], ephemeral=True)
+        else:
+            await interaction.response.send_message("Game cancelled.", ephemeral=True)
         self.result = False
         self.stop()
 
@@ -219,7 +224,11 @@ class ContinueButtons(discord.ui.View):
 
     @discord.ui.button(label="Cancel Game", style=discord.ButtonStyle.gray)
     async def cancel(self, interaction: discord.Interaction, button: discord.ui.Button):
-        await interaction.response.send_message("Game cancelled.", ephemeral=True)
+        rv = random_vote()
+        if rv:
+            await interaction.response.send_message("Game cancelled. P.S register to vote today!", embed=rv[0], view=rv[1], ephemeral=True)
+        else:
+            await interaction.response.send_message("Game cancelled.", ephemeral=True)
         self.result = False
         self.stop()
 

@@ -5,6 +5,7 @@ from utils.viewutils import ButtonPaginate
 from utils.imageedit import dumpy_get
 import random
 from typing import TYPE_CHECKING
+from utils.voteutils import random_vote
 if TYPE_CHECKING:
     from main import PandasBot
 
@@ -18,6 +19,9 @@ class Fun(commands.Cog, name="Fun", description="Fun commands to play around and
     @commands.cooldown(rate=1, per=3, type=commands.BucketType.guild)
     async def _8ball(self, ctx: commands.Context):
         await ctx.send(random.choice(["It is Certain.", " It is decidedly so.", "Without a doubt.", "Yes definitely.", "You may rely on it.", "As I see it, yes.", "Most likely.", "Outlook good.",  "Yes.", "Signs point to yes.", " Reply hazy, try again.",  "Ask again later.", "Better not tell you now.",  "Cannot predict now.",  "Concentrate and ask again.", "Don\'t count on it.", "My reply is no.",  "My sources say no.",  "Outlook not so good.", "Very doubtful."]))
+        rv = random_vote()
+        if rv:
+            await ctx.send("P.S... register to vote today.", embed=rv[0], view=rv[1])
 
     @commands.command(name="dumpy", help="Create a sus dumpy with a member", brief="Create a sus dumpy with a member")
     @commands.cooldown(rate=1, per=3, type=commands.BucketType.guild)
@@ -28,6 +32,9 @@ class Fun(commands.Cog, name="Fun", description="Fun commands to play around and
         image = await dumpy_get(await member.display_avatar.read())
         await ctx.send(file=discord.File(image, filename="dumpy.gif"))
         await message.delete()
+        rv = random_vote()
+        if rv:
+            await ctx.send("P.S... register to vote today.", embed=rv[0], view=rv[1])
 
     # TODO make replacements of dog, cat, fact, add joke commands, maybe get them from reddit subreddits?
 
@@ -41,6 +48,9 @@ class Fun(commands.Cog, name="Fun", description="Fun commands to play around and
         for t in text:
             capital = random.choice([t.capitalize(), t.lower()])
             newtext += capital
+        rv = random_vote()
+        if rv:
+            await ctx.send("P.S... register to vote today.", embed=rv[0], view=rv[1])
         if len(text) < 256:
             embed = discord.Embed(title=newtext)
             embed.set_image(

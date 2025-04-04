@@ -8,6 +8,7 @@ from io import BytesIO
 import asyncio
 import datetime
 from typing import TYPE_CHECKING, List
+from utils.voteutils import random_vote
 if TYPE_CHECKING:
     from main import PandasBot
 
@@ -66,6 +67,11 @@ class WordleView(discord.ui.View):
 
     @discord.ui.button(emoji="🛑", style=discord.ButtonStyle.grey)
     async def deny(self, interaction: discord.Interaction, button: discord.ui.Button):
+        rv = random_vote()
+        if rv:
+            await interaction.response.send_message("Game cancelled. P.S register to vote today!", embed=rv[0], view=rv[1], ephemeral=True)
+        else:
+            await interaction.response.send_message("Game cancelled.", ephemeral=True)
         self.result = False
         self.stop()
 
@@ -224,6 +230,10 @@ class Wordle(commands.Cog, name="Wordle", description="Wordle! Guess the 5 lette
             emojilines.append(self.word_emoji(guess, theword))
         embed, boardimg = await self.create_embed(ctx, board, emoji, theword, keyboard, win=guess == theword)
         await ctx.send(embed=embed, file=boardimg)
+        rv = random_vote()
+        if rv:
+            await ctx.send("P.S... register to vote today.", embed=rv[0], view=rv[1])
+
         await self.bot.db.execute("DELETE FROM wordle WHERE member=$1 AND channel=$2;", ctx.author.id, ctx.channel.id)
 
 

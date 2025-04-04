@@ -7,6 +7,7 @@ import discord
 from discord.ext import commands
 from typing import List, Dict, Tuple, TYPE_CHECKING
 import random
+from utils.voteutils import random_vote
 if TYPE_CHECKING:
     from main import PandasBot
 
@@ -58,6 +59,11 @@ class WorldleView(discord.ui.View):
 
     @discord.ui.button(emoji="🛑", style=discord.ButtonStyle.grey)
     async def deny(self, interaction: discord.Interaction, button: discord.ui.Button):
+        rv = random_vote()
+        if rv:
+            await interaction.response.send_message("Game cancelled. P.S register to vote today!", embed=rv[0], view=rv[1], ephemeral=True)
+        else:
+            await interaction.response.send_message("Game cancelled.", ephemeral=True)
         self.cancel = True
         self.stop()
 
@@ -238,6 +244,9 @@ class Worldle(commands.Cog, name="Worldle", description="Worldle! A fun variatio
             world.run_guess(guess)
         eembed, eimg = await world.create_embed(ctx, win=guess == world.countryname)
         await ctx.reply(embed=eembed, file=eimg)
+        rv = random_vote()
+        if rv:
+            await ctx.send("P.S... register to vote today.", embed=rv[0], view=rv[1])
         await self.bot.db.execute("DELETE FROM worldgame WHERE member=$1 AND channel=$2;", ctx.author.id, ctx.channel.id)
 
 
