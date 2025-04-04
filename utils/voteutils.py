@@ -1,11 +1,10 @@
 import discord
-from discord.ext import commands
 
 class VoteView(discord.ui.View):
     def __init__(self):
         super().__init__()
 
-    @discord.ui.button(label="Register to vote", style=discord.ButtonStyle.link, url="https://vote.gov")
+    @discord.ui.button(label="Register to vote", style=discord.ButtonStyle.link)
     async def vote(self, interaction: discord.Interaction, button: discord.ui.Button):
         return
 
